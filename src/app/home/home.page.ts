@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { PlatziMusicService } from '../services/platzi-music.service';
+import { SongModalPage } from '../song-modal/song-modal.page';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +19,10 @@ export class HomePage {
   songs: any[] = [];
   albums: any[] = [];
 
-  constructor(private musicService: PlatziMusicService) {}
+  constructor(
+    private musicService: PlatziMusicService,
+    private modalController: ModalController
+  ) {}
 
   ionViewDidEnter() {
     this.musicService.getNewReleases().then((newReleases) => {
@@ -29,5 +34,18 @@ export class HomePage {
         (e) => e.album_type == 'album'
       );
     });
+  }
+
+  async showSongs(artist) {
+    const songs = await this.musicService.getArtistTopTrack(artist.id);
+    const modal = await this.modalController.create({
+      component: SongModalPage,
+      componentProps: {
+        songs: songs.track,
+        artist: artist.name,
+      },
+    });
+
+    return await modal.present();
   }
 }

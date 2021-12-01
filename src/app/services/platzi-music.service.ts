@@ -11,6 +11,12 @@ export class PlatziMusicService {
     return dataArtist.items;
   }
 
+  getArtistTopTrack(artistId: number) {
+    return fetch(
+      `https://platzi-music-api.herokuapp.com/artists/${artistId}/top-tracks?country=CO`
+    ).then((response) => response.json());
+  }
+
   getNewReleases() {
     return fetch(
       'https://platzi-music-api.herokuapp.com/browse/new-releases'
