@@ -21,9 +21,13 @@ export class HomePage {
 
   ionViewDidEnter() {
     this.musicService.getNewReleases().then((newReleases) => {
-      this.artists = newReleases.albums.items;
-      this.songs = newReleases.albums.items.filter((e) => e.album_type == 'single');
-      this.albums = newReleases.albums.items.filter((e) => e.album_type == 'album');
+      this.artists = this.musicService.getArtist();
+      this.songs = newReleases.albums.items.filter(
+        (e) => e.album_type == 'single'
+      );
+      this.albums = newReleases.albums.items.filter(
+        (e) => e.album_type == 'album'
+      );
     });
   }
 }
