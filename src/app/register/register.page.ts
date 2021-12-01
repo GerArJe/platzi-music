@@ -1,17 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
-import { AuthenticateService } from '../services/authenticate.service';
 import { Storage } from '@ionic/storage';
+import { AuthenticateService } from '../services/authenticate.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-register',
+  templateUrl: './register.page.html',
+  styleUrls: ['./register.page.scss'],
 })
-export class LoginPage implements OnInit {
-  loginForm: FormGroup;
+export class RegisterPage implements OnInit {
+  registerForm: FormGroup;
   validation_messages = {
+    nombre: [
+      { type: 'required', message: 'El nombre es requerido' },
+      { type: 'minLength', message: 'minimo 3 letras' },
+    ],
+    apellido: [
+      { type: 'required', message: 'El apellido es requerido' },
+      { type: 'minLength', message: 'minimo 3 letras' },
+    ],
     email: [
       { type: 'required', message: 'El email es requerido' },
       { type: 'pattern', message: 'ojo! este no es un email válido' },
@@ -29,7 +37,9 @@ export class LoginPage implements OnInit {
     private navCtrl: NavController,
     private storage: Storage
   ) {
-    this.loginForm = this.formBuilder.group({
+    this.registerForm = this.formBuilder.group({
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      apellido: ['', [Validators.required, Validators.minLength(3)]],
       email: [
         '',
         [
@@ -43,20 +53,13 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
-  loginUser() {
-    this.authenticateService
-      .loginUser(this.loginForm.value)
-      .then((response) => {
-        this.errorMessage = '';
-        this.storage.set('isUserLoggedIn', true);
-        this.navCtrl.navigateForward('/home');
-      })
-      .catch((error) => {
-        this.errorMessage = error;
-      });
+  register() {
+    this.authenticateService.registerUser(this.registerForm.value).then(() => {
+      this.goToLogin();
+    });
   }
 
-  goToRegister() {
-    this.navCtrl.navigateForward('/register');
+  goToLogin() {
+    this.navCtrl.navigateBack('/login');
   }
 }
