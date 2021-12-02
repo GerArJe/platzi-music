@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
@@ -7,14 +7,12 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
   templateUrl: './settings.page.html',
   styleUrls: ['./settings.page.scss'],
 })
-export class SettingsPage implements OnInit {
+export class SettingsPage {
   userImage =
     'https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg';
   photo: SafeResourceUrl;
 
   constructor(private domSanitizer: DomSanitizer) {}
-
-  ngOnInit() {}
 
   async takePhoto() {
     const image = await Camera.getPhoto({

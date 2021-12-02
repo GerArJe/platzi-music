@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
@@ -7,14 +7,12 @@ import { Storage } from '@ionic/storage';
   templateUrl: './menu.page.html',
   styleUrls: ['./menu.page.scss'],
 })
-export class MenuPage implements OnInit {
+export class MenuPage {
   constructor(
     private menu: MenuController,
     private navCtrl: NavController,
     private storage: Storage
   ) {}
-
-  ngOnInit() {}
 
   closeMenu() {
     this.menu.close();
@@ -28,5 +26,6 @@ export class MenuPage implements OnInit {
   }
   goToSettings() {
     this.navCtrl.navigateRoot('menu/settings');
+    this.menu.close();
   }
 }

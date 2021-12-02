@@ -4,11 +4,6 @@ import { IntroGuard } from './guards/intro.guard';
 import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
-  // {
-  //   path: 'home',
-  //   loadChildren: () =>
-  //     import('./home/home.module').then((m) => m.HomePageModule),
-  // },
   {
     path: '',
     redirectTo: 'menu',
@@ -37,9 +32,11 @@ const routes: Routes = [
   },
   {
     path: 'song-modal',
-    loadChildren: () => import('./song-modal/song-modal.module').then( m => m.SongModalPageModule)
+    loadChildren: () =>
+      import('./song-modal/song-modal.module').then(
+        (m) => m.SongModalPageModule
+      ),
   },
-  
 ];
 
 @NgModule({

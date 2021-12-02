@@ -18,9 +18,17 @@ export class HomePage {
   artists: any[] = [];
   songs: any[] = [];
   albums: any[] = [];
-  song: any = {};
+  song: {
+    preview_url: string;
+    playing: boolean;
+    name: string;
+  } = {
+    preview_url: '',
+    playing: false,
+    name: '',
+  };
   currentSong: HTMLAudioElement;
-  newTime;
+  newTime: number;
 
   constructor(
     private musicService: PlatziMusicService,
@@ -75,7 +83,7 @@ export class HomePage {
     this.song.playing = false;
   }
 
-  parseTime(time: any) {
+  parseTime(time: number) {
     if (time) {
       const partTime = parseInt(time.toString().split('.')[0], 10);
       let minutes = Math.floor(partTime / 60).toString();

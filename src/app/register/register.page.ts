@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
@@ -9,7 +9,7 @@ import { AuthenticateService } from '../services/authenticate.service';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage {
   registerForm: FormGroup;
   validation_messages = {
     nombre: [
@@ -50,8 +50,6 @@ export class RegisterPage implements OnInit {
       password: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
-
-  ngOnInit() {}
 
   register() {
     this.authenticateService.registerUser(this.registerForm.value).then(() => {

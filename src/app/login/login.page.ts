@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { AuthenticateService } from '../services/authenticate.service';
@@ -9,7 +9,7 @@ import { Storage } from '@ionic/storage';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   loginForm: FormGroup;
   validation_messages = {
     email: [
@@ -40,8 +40,6 @@ export class LoginPage implements OnInit {
       password: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
-
-  ngOnInit() {}
 
   loginUser() {
     this.authenticateService
