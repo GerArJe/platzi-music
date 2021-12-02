@@ -41,7 +41,7 @@ export class HomePage {
     const modal = await this.modalController.create({
       component: SongModalPage,
       componentProps: {
-        songs: songs.track,
+        songs: songs.tracks,
         artist: artist.name,
       },
     });
