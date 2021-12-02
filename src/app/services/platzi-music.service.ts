@@ -22,4 +22,10 @@ export class PlatziMusicService {
       'https://platzi-music-api.herokuapp.com/browse/new-releases'
     ).then((response) => response.json());
   }
+
+  getAlbumTracks(albumId) {
+    return fetch(
+      `https://platzi-music-api.herokuapp.com/albums/${albumId}/tracks?country=CO`
+    ).then((response) => response.json());
+  }
 }

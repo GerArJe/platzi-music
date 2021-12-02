@@ -39,13 +39,19 @@ export class HomePage {
     });
   }
 
-  async showSongs(artist) {
-    const songs = await this.musicService.getArtistTopTrack(artist.id);
+  async showSongs(artist?, album?) {
+    let songs;
+    if (artist) {
+      songs = await this.musicService.getArtistTopTrack(artist.id);
+    } else {
+      songs = await this.musicService.getAlbumTracks(album.id);
+    }
     const modal = await this.modalController.create({
       component: SongModalPage,
       componentProps: {
-        songs: songs.tracks,
-        artist: artist.name,
+        songs: songs?.tracks ?? songs?.items,
+        artist: artist ? true : false,
+        title: artist?.name ?? album.name,
       },
     });
     modal.onDidDismiss().then((dataReturned) => {

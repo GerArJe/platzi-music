@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{artist + " - Top tracks"}}</ion-title>
+    <ion-title>{{artist ? title + " - Top tracks" : title}}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="selectSong()" slot="end"> Cerrar </ion-button>
     </ion-buttons>
