@@ -9,4 +9,32 @@
 
 <ion-content>
   <div id="map" style="height: 300px"></div>
+  <ion-searchbar
+    debounce="500"
+    (ionChange)="searchTracks($event)"
+  ></ion-searchbar>
+  <ion-row class="ion-text-center" *ngIf="loading">
+    <ion-col size="12">
+      <ion-spinner></ion-spinner>
+    </ion-col>
+  </ion-row>
+  <ion-list *ngIf="!loading">
+    <ion-item *ngFor="let song of songs">
+      <ion-label>{{song.name}}</ion-label>
+      <ion-icon
+        name="pause"
+        *ngIf="(currentSong.preview_url == song.preview_url && currentSong.playing)"
+        (click)="pause()"
+      ></ion-icon>
+      <ion-spinner
+        name="dots"
+        *ngIf="(currentSong.preview_url == song.preview_url && currentSong.playing)"
+      ></ion-spinner>
+      <ion-icon
+        name="play"
+        *ngIf="(currentSong.preview_url == song.preview_url && !currentSong.playing) || (currentSong.preview_url != song.preview_url)"
+        (click)="play(song)"
+      ></ion-icon>
+    </ion-item>
+  </ion-list>
 </ion-content>
