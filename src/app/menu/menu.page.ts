@@ -24,8 +24,19 @@ export class MenuPage {
     this.storage.remove('isUserLoggedIn');
     this.navCtrl.navigateRoot('/login');
   }
+
   goToSettings() {
     this.navCtrl.navigateRoot('menu/settings');
-    this.menu.close();
+    this.closeMenu();
+  }
+
+  goToHome() {
+    this.navCtrl.navigateRoot('menu/home');
+    this.closeMenu();
+  }
+
+  goToSports() {
+    this.navCtrl.navigateRoot('menu/sports');
+    this.closeMenu();
   }
 }
